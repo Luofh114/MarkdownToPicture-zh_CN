@@ -1,0 +1,41 @@
+# 高等数学笔记
+
+## 一、极限
+
+函数 $f(x)$ 在 $x_0$ 处连续，当且仅当
+
+$$ \lim_{x \to x_0} f(x) = f(x_0) $$
+
+两个重要极限：
+
+$$ \lim_{x \to 0} \frac{\sin x}{x} = 1, \qquad \lim_{x \to \infty}\left(1+\frac{1}{x}\right)^x = e $$
+
+## 二、导数与微分
+
+$$ \frac{d}{dx}\left[ f(g(x)) \right] = f'(g(x)) \cdot g'(x) $$
+
+常见函数的导数：
+
+- $(x^n)' = n x^{n-1}$
+- $(\sin x)' = \cos x$
+- $(\ln x)' = \dfrac{1}{x}$
+
+## 三、定积分
+
+$$ \int_{0}^{\infty} e^{-x^2}\, dx = \frac{\sqrt{\pi}}{2} $$
+
+$$ \iint_{D} (x^2 + y^2)\, dx\, dy = \int_{0}^{2\pi}\int_{0}^{R} r^3\, dr\, d\theta = \frac{\pi R^4}{2} $$
+
+## 四、线性代数
+
+$$ A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, \qquad \det A = 1\cdot 4 - 2\cdot 3 = -2 $$
+
+\begin{equation}
+  A^{-1} = \frac{1}{\det A}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+\end{equation}
+
+## 五、常用求和公式
+
+$$ \sum_{i=1}^{n} i = \frac{n(n+1)}{2}, \qquad \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$
+
+更多内容见 [数学公式参考](https://en.wikipedia.org/wiki/Mathematical_formula)。

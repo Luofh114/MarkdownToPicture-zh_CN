@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>txt → LaTeX + Markdown 图片</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white' font-family='serif'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">∑</span>
+    <div>
+      <h1>txt → LaTeX + Markdown 图片</h1>
+      <p>上传 txt，按 LaTeX / Markdown 渲染，导出任意尺寸的 PNG。全部离线运行。</p>
+    </div>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="card">
+    <div class="card-head">
+      <h2><span class="step">1</span> 输入内容</h2>
+      <span class="hint">txt / md / tex</span>
+    </div>
+
+    <label class="dropzone" id="dropzone">
+      <input type="file" id="fileInput" accept=".txt,.md,.markdown,.mdown,.mkd,.tex,.latex,text/plain,text/markdown">
+      <span class="dz-icon">⬆</span>
+      <span class="dz-title">点击选择文件，或把文件拖到这里</span>
+      <span class="dz-sub">支持 $…$、$$…$$、\(…\)、\[…\]、\begin{equation}…\end{equation} 等写法</span>
+    </label>
+
+    <textarea id="source" spellcheck="false" aria-label="文本内容"></textarea>
+
+    <div class="row-actions">
+      <button type="button" class="btn ghost" id="sampleBtn">载入示例</button>
+      <button type="button" class="btn ghost" id="clearBtn">清空</button>
+      <span class="file-meta" id="fileMeta"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2><span class="step">2</span> 图片尺寸</h2>
+      <span class="hint">实时预览</span>
+    </div>
+
+    <div class="field">
+      <div class="field-label"><label for="widthRange">图片宽度</label><output id="widthOut">800 px</output></div>
+      <div class="range-row">
+        <input type="range" id="widthRange" min="320" max="2000" step="10" value="800">
+        <input type="number" id="widthNum" min="200" max="4000" step="10" value="800">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label"><label for="padRange">内边距</label><output id="padOut">32 px</output></div>
+      <div class="range-row">
+        <input type="range" id="padRange" min="0" max="120" step="4" value="32">
+        <input type="number" id="padNum" min="0" max="200" step="4" value="32">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label"><label for="fontRange">正文字号</label><output id="fontOut">16 px</output></div>
+      <div class="range-row">
+        <input type="range" id="fontRange" min="10" max="48" step="1" value="16">
+        <input type="number" id="fontNum" min="8" max="64" step="1" value="16">
+      </div>
+    </div>
+
+    <div class="field two-col">
+      <div>
+        <label for="scaleSelect">清晰度</label>
+        <select id="scaleSelect">
+          <option value="1">1× 普通</option>
+          <option value="2" selected>2× 高清</option>
+          <option value="3">3× 超清</option>
+        </select>
+      </div>
+      <div>
+        <label for="bgSelect">背景</label>
+        <select id="bgSelect">
+          <option value="white" selected>白色</option>
+          <option value="paper">米白</option>
+          <option value="transparent">透明</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="nameInput">文件名</label>
+      <input type="text" id="nameInput" value="latex-markdown" spellcheck="false">
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn primary" id="downloadBtn">下载图片</button>
+      <button type="button" class="btn ghost" id="fitBtn">适应宽度</button>
+    </div>
+    <p class="status" id="status" role="status"></p>
+  </section>
+
+  <section class="card preview-card">
+    <div class="card-head">
+      <h2><span class="step">3</span> 预览</h2>
+      <span class="hint" id="sizeHint"></span>
+    </div>
+    <div class="preview-scroll" id="previewScroll">
+      <div class="paper" id="previewPaper"><div class="md-body" id="previewBody"></div></div>
+    </div>
+    <div class="preview-result" id="resultWrap" hidden>
+      <h3>生成结果</h3>
+      <img id="resultImg" alt="生成的图片">
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>KaTeX 渲染 · 导出为 PNG · 无需联网</span>
+</footer>
+
+<script src="vendor/katex/katex.embedded.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/marked/marked.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
